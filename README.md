@@ -11,10 +11,10 @@
     1. Create the `ipt_product` by multiplying the `ipt` from 1) with `IPT_FACTOR`
     2. Slice the transactions from `self.last_date - ipt_product * 2` until `self.last_date - ipt_product`
     3. Select the transaction date which has the **highest** revenue. 
-    If there are no transactions in the slice, select the last possible date before `ipt_product`.
+    If there are no transactions in the slice, select the last possible date before `self.last_date - ipt_product`.
     
  - Calculate the Expected **daily** revenue by
-    1. <u>Option 1</u>: Slicing the transactions until the last date, calculating the revenue per day 
+    1. <u>Option 1</u>: Slicing the transactions until the `last_transaction_date`, calculating the revenue per day 
     and getting the median from it
     2. <u>Option 2 (Bonus)</u>: Fitting a Probability Distribution and getting the .5 quantile.
  
