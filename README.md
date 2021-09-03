@@ -37,6 +37,7 @@ For the classification of a customer at risk, try to achieve values > 60%, ideal
  1. The transaction data is in `resources/transactions.csv`
  2. All tasks are defined for a single customer 
  3. You can test your solutions with pytest. Every file has a corresponding test.
+ 4. The `last_date` is a date that is always provided as an external parameter. The last_date here is the 16.07.2021 (this is also in the tests) 
   
 E.g.
 ```
