@@ -3,6 +3,8 @@ import datetime as dt
 
 import pandas as pd
 
+from tasks.expected_customer_behavior_2 import ExpectedCustomerBehavior
+
 
 class AtRisk(IntEnum):
     """
@@ -14,8 +16,6 @@ class AtRisk(IntEnum):
     NO = 0
     UNKNOWN = -99999
 
-
-# TODO 3
 class Customer:
     """
     Is the customer at risk? To evaluate that you have to:
@@ -33,7 +33,6 @@ class Customer:
         - last_date                 - the last (possible) available date in the data set.
                                       Not to be confused with
 
-        (TODO 3.1)
         - at_risk                   - the class of the customer
     """
     RISK_PERCENTAGES = {
@@ -51,9 +50,8 @@ class Customer:
         }
     }
 
-    transactions: pd.DataFrame
 
-    # TODO 3.1
+    transactions: pd.DataFrame
     at_risk: AtRisk
 
     def __init__(self,
@@ -61,8 +59,13 @@ class Customer:
                  last_date: dt.date):
         self.transactions = transactions
         self.last_date = last_date
+        self.at_risk = AtRisk.NO
+        expected_behavior = ExpectedCustomerBehavior(transactions=transactions, last_date=dt.date(2021, 7, 16))
 
-        # ########################
-        # Your code goes here...
-        # ########################
-        self.at_risk = AtRisk.UNKNOWN
+        # quotient between the revenue_made and the expected_rev
+        self.quotient = round(expected_behavior.rev_made / expected_behavior.expected_rev_until_last_date, 3)
+
+        # check which risk class the Customer revenue quotient belongs to
+        for key, value in Customer.RISK_PERCENTAGES.items():
+            if value['min'] < self.quotient < value['max']:
+                self.at_risk = key

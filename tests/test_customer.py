@@ -24,6 +24,7 @@ def correct_answers(transactions, at_risk_customers):
 
         res = int(cust.at_risk)
         answer = int(at_risk_customers.loc[cust_id].at_risk)
+
         if res == answer:
             correct += 1
     return correct
@@ -42,7 +43,6 @@ def test_above_20_perc(correct_answers, transactions):
 def test_above_40_perc(correct_answers, transactions):
     correct_answers = correct_answers
     transactions = transactions
-
     n_customers = transactions.index.unique().shape[0]
     assert correct_answers / n_customers > .4, (
         "The Correct answers are below 40%; "

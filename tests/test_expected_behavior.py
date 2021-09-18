@@ -19,6 +19,7 @@ def test_last_transaction_dates(transactions, last_transaction_date):
         cust_transactions = transactions.loc[cust_id]
         expected_behavior = ExpectedCustomerBehavior(transactions=cust_transactions,
                                                      last_date=dt.date(2021, 7, 16))
+
         assert (
             str(expected_behavior.last_transaction_date) ==
             str(last_transaction_date.loc[cust_id].last_transaction_date)
@@ -81,7 +82,6 @@ def test_rev_made(transactions, rev_to_make_and_made):
                                                      last_date=dt.date(2021, 7, 16))
         res = expected_behavior.rev_made
         answer = rev_to_make_and_made.loc[cust_id].rev_made
-        print(cust_id, res, answer)
         assert (
             1 + res == pytest.approx(answer + 1, .15)
         ), (
