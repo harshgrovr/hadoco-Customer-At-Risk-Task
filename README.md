@@ -1,5 +1,8 @@
 # Tasks
  
+ ## _Task 3 accuracy 59 percent _
+ 
+ 
 1. Customer Info
  - Calculate the median `ipt` (interpurchase time) for the customer. 
  The IPT is defined as the time between purchases.
